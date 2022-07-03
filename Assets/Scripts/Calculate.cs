@@ -13,6 +13,12 @@ public class Calculate : MonoBehaviour {
 
     private int answer;
 
+    public void Restart() {
+        _firstInputField.text = "";
+        _secondInputField.text = "";
+        _answerText.text = "";
+    }
+
     public void onClickCalculate(Text text) {
 
         if (text.text.Equals("+") && _firstInputField.text != "" && _secondInputField.text != "") {
