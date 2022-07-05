@@ -11,7 +11,9 @@ public class Calculate : MonoBehaviour {
 
     [SerializeField] private Text _answerText;
 
-    private int answer;
+    private float answer;
+    private float firstConvertInputFiel;
+    private float secondConvertInputFiel;
 
     public void Restart() {
         _firstInputField.text = "";
@@ -19,29 +21,45 @@ public class Calculate : MonoBehaviour {
         _answerText.text = "";
     }
 
-    public void onClickCalculate(Text text) {
+    public void onClickPlusButton() {
+        convertInputField();
+        answer = firstConvertInputFiel + secondConvertInputFiel;
 
-        if (text.text.Equals("+") && _firstInputField.text != "" && _secondInputField.text != "") {
-            answer = Convert.ToInt32(_firstInputField.text) + Convert.ToInt32(_secondInputField.text);
-            _answerText.text = answer.ToString();
-
-        } else if (text.text.Equals("-") && _firstInputField.text != "" && _secondInputField.text != "") {
-            answer = Convert.ToInt32(_firstInputField.text) - Convert.ToInt32(_secondInputField.text);
-            _answerText.text = answer.ToString();
-
-        } else if (text.text.Equals("*") && _firstInputField.text != "" && _secondInputField.text != "") {
-            answer = Convert.ToInt32(_firstInputField.text) * Convert.ToInt32(_secondInputField.text);
-            _answerText.text = answer.ToString();
-
-        } else if (text.text.Equals("/") && _firstInputField.text != "" && _secondInputField.text != "") {
-            if(_firstInputField.text.Equals("0") || _secondInputField.text.Equals("0")) {
-                _answerText.text = "На 0 делить нельзя";
-
-            } else {
-                answer = Convert.ToInt32(_firstInputField.text) / Convert.ToInt32(_secondInputField.text);
-                _answerText.text = answer.ToString();
-            }
-        } 
-        
+        _answerText.text = answer.ToString();
     }
+
+    public void onClickMinusButton() {
+        convertInputField();
+        answer = firstConvertInputFiel - secondConvertInputFiel;
+
+        _answerText.text = answer.ToString();
+    }
+
+    public void onClickMultiplyButton() {
+        convertInputField();
+        answer = firstConvertInputFiel * secondConvertInputFiel;
+
+        _answerText.text = answer.ToString();
+    }
+
+    public void onClickDivideButton() {
+        convertInputField();
+
+        if (firstConvertInputFiel == 0 || secondConvertInputFiel == 0) {
+            _answerText.text = "На 0 делить нельзя";
+
+        } else {
+            answer = firstConvertInputFiel + secondConvertInputFiel;
+            _answerText.text = answer.ToString();
+        }
+    }
+
+    private void convertInputField() {
+        if (_firstInputField.text != "" && _secondInputField.text != "") {
+            firstConvertInputFiel = Convert.ToInt32(_firstInputField.text);
+            secondConvertInputFiel = Convert.ToInt32(_secondInputField.text);
+        }
+    }
+
+
 }
